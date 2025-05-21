@@ -26,7 +26,12 @@ function retrieveDiscoveryServices(testUrl) {
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${signedPrivateJWT}`,
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
       },
+      withCredentials: true,
+      crossdomain: true
     }).then((result) => {
       if (result.data && result.data.services && result.data.services.length) {
         store.dispatch(signalSuccessServicesRetrieval(result.data.services, discoveryUrl));
