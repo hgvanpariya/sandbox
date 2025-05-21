@@ -83,7 +83,11 @@ export class ServicesEntry extends Component {
       });
     }
     try {
-      await retrieveDiscoveryServices(checkUrl).then(() => {
+      // Add a proxy prefix to the URL to handle CORS
+      const proxyUrl = '/proxy/';  // You'll need to set up this proxy on your server
+      const urlToFetch = proxyUrl + checkUrl;
+      
+      await retrieveDiscoveryServices(urlToFetch).then(() => {
         this.handleCloseModal();
       });
     } catch (e) {
